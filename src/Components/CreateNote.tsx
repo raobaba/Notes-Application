@@ -1,5 +1,6 @@
-import { InputBase,Box, Button,styled } from "@mui/material";
+import { InputBase, Box, Button, styled } from "@mui/material";
 import { useState } from "react";
+import {v4 as uuid} from "uuid";
 const Container = styled(Box)`
    & > * {
     margin-right: 20px;
@@ -24,32 +25,35 @@ const Container = styled(Box)`
    }
 `
 const defaulObj = {
-  id:0,
-  title:'',
-  detail:'',
-  color:'',
-  date:(new Date().toLocaleString()).toString()
+  id: 0,
+  title: '',
+  detail: '',
+  color: '',
+  date: (new Date().toLocaleString()).toString()
 }
 export interface NoteObject {
-  id:number,
-  title:string,
-  detail:string,
-  color:string,
-  date:string
+  id: number,
+  title: string,
+  detail: string,
+  color: string,
+  date: string
 }
-export const CreateNote:React.FC = ()=> {
-  const [note,setNote] = useState<NoteObject>(defaulObj);
-  const onValueChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
+interface IcreateNoteProps {
+  addNotes: (note: NoteObject) => void
+}
+export const CreateNote: React.FC<IcreateNoteProps> = ({ addNotes }) => {
+  const [note, setNote] = useState<NoteObject>(defaulObj);
+  const onValueChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 
   }
   return (
     <Container>
-        <InputBase placeholder='Title' name="title" onChange={(e)=>onValueChange(e)} />
-        <Box component='span'>30</Box>
-        <InputBase placeholder='Detail' name='detail' onChange={(e)=>onValueChange(e)} />
-        <Box component='span'>50</Box>
-        <InputBase type="color" defaultValue='#F5F5F5' name='color' onChange={(e)=>onValueChange(e)} />
-        <Button variant='outlined'>Create</Button>
+      <InputBase placeholder='Title' name="title" onChange={(e) => onValueChange(e)} />
+      <Box component='span'>30</Box>
+      <InputBase placeholder='Detail' name='detail' onChange={(e) => onValueChange(e)} />
+      <Box component='span'>50</Box>
+      <InputBase type="color" defaultValue='#F5F5F5' name='color' onChange={(e) => onValueChange(e)} />
+      <Button variant='outlined'>Create</Button>
     </Container>
   )
 }
