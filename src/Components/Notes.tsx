@@ -5,14 +5,14 @@ interface INoteProps {
     notes: NoteObject[],
     deleteNote: (id: number) => void
 }
-export const Notes:React.FC<INoteProps> = ({notes})=> {
+export const Notes:React.FC<INoteProps> = ({notes,deleteNote})=> {
   return (
     <Box>
       <Typography>Notes</Typography>
       <Box>
         {
            notes.map(note=>(
-            <Note note={note}/>
+            <Note note={note} deleteNote={deleteNote}/>
            ))
         }
       </Box>

@@ -64,12 +64,15 @@ export const CreateNote: React.FC<IcreateNoteProps> = ({ addNotes }) => {
     addNotes({...note,id:uuid()})
     setNote(defaultObj)
   }
+  const TITLE_LIMIT = 30;
+  const DETAIL_LIMIT = 50;
+
   return (
     <Container>
-      <InputBase placeholder='Title' name="title" onChange={(e) => onValueChange(e)} />
-      <Box component='span'>30</Box>
-      <InputBase placeholder='Detail' name='detail' onChange={(e) => onValueChange(e)} />
-      <Box component='span'>50</Box>
+      <InputBase placeholder='Title' inputProps={{maxLenght:TITLE_LIMIT}} value={note.title} name="title" onChange={(e) => onValueChange(e)} />
+      <Box component='span'>{note.title.length}/{TITLE_LIMIT}</Box>
+      <InputBase placeholder='Detail' inputProps={{maxLength:DETAIL_LIMIT}} value={note.detail} name='detail' onChange={(e) => onValueChange(e)} />
+      <Box component='span'>{note.detail.length}/{DETAIL_LIMIT}</Box>
       <InputBase type="color" defaultValue='#F5F5F5' name='color' onChange={(e) => onValueChange(e)} />
       <Button onClick={()=>onCreateNote()} variant='outlined'>Create</Button>
       {error && <Error>{error}</Error>}
